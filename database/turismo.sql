@@ -9,8 +9,6 @@ CREATE TABLE usuarios (
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-//pontos_turismo//
-    
 CREATE TABLE `pontos_turisticos` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
