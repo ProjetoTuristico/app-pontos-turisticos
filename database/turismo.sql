@@ -9,11 +9,29 @@ CREATE TABLE usuarios (
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE categorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50)
+);
+
 CREATE TABLE pontos_turisticos (
-  id int(11) NOT NULL,
-  nome VARCHAR(150) DEFAULT NULL,
-  descricao text DEFAULT NULL,
-  cidade varchar(100) DEFAULT NULL,
-  estado varchar(50) DEFAULT NULL,
-  imagem_url text DEFAULT NULL,
-  categoria_id int(11) DEFAULT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(150),
+    descricao TEXT,
+    cidade VARCHAR(100),
+    estado VARCHAR(50),
+    imagem_url TEXT,
+    categoria_id INT,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+);
+
+CREATE TABLE avaliacoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    ponto_id INT,
+    nota INT CHECK (nota >= 1 AND nota <= 5),
+    comentario TEXT,
+    data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (ponto_id) REFERENCES pontos_turisticos(id)
+);
